@@ -28,23 +28,28 @@ const Navbar = async () => {
 
                 <div className='flex flex-row gap-4'>
                     {session?.user ?
+                        <div>
+                            <form action={async () => {
+                                'use server'
+                                await signOut({ redirectTo: "/" })
+                            }}>
+                                <button type='submit'>Logout</button>
+                            </form>
 
-                        <form action={async () => {
-                            'use server'
-                            await signOut({ redirectTo: "/" })
-                        }}>
-                            <button type='submit'>Logout</button>
-                        </form>
+                            <Link href={'/dashboard'}>{'Dashboard'}</Link>
+                        </div>
                         :
                         <form action={async () => {
                             'use server'
                             await signIn('google', { redirectTo: "/" })
                         }}>
                             <button type='submit'>Sign In</button>
-                        </form>}
+                        </form>
+                    }
 
                     <Link href={`/profile/${session?.user.id}`}>Profile</Link>
                     <p>{session?.user.name}</p>
+
                 </div>
             </div>
 

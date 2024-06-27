@@ -2,24 +2,18 @@ import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
 
 const itemSchema = new mongoose.Schema({
-    owned: {
-        type: Boolean,
-        required: true,
-    },
-    createdAt: {
-        // type: Date,
+
+    name: {
         type: String,
         required: true,
-        // default: Date.now
+        unique: true
     },
     dateAdded: {
-        // type: Date,
-        type: String,
+        type: Date,
         required: true,
     },
-    cost: {
-        type: Number,
-        required: true,
+    notes: {
+        type: String,
     },
 
 
