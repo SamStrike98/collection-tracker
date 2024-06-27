@@ -15,16 +15,13 @@ const userSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        required: true,
-        default: Date.now
+        required: true
     },
     collections: {
         type: Array,
-        required: true
     },
     friends: {
         type: Array,
-        required: true
     }
 });
 

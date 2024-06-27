@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import dbConnect from "@/lib/mongo"
-import User from '@/model/user-model'
+import User from '@/models/user-model'
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import clientPromise from "./lib/db"
 
@@ -20,7 +20,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     email: profile.email,
                     image: profile.picture,
                     // Add a new one
-                    role: 'user'
+                    role: 'user',
+                    displayName: profile.name,
                 };
             },
 
@@ -51,7 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 const existingUser = await User.findOne({ email });
 
                 if (!existingUser) {
-                    await User.create({ email, name, role: 'user' });
+                    await User.create({ email, name, role: 'user', displayName: name });
                 }
 
                 // Log success and return true to allow sign-in

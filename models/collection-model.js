@@ -2,20 +2,19 @@ import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
 
 const itemSchema = new mongoose.Schema({
-    itemId: {
-        type: ObjectId,
-        required: true,
-    },
     owned: {
         type: Boolean,
         required: true,
     },
     createdAt: {
-        type: Date,
+        // type: Date,
+        type: String,
         required: true,
+        // default: Date.now
     },
     dateAdded: {
-        type: Date,
+        // type: Date,
+        type: String,
         required: true,
     },
     cost: {
@@ -31,13 +30,19 @@ const collectionSchema = new mongoose.Schema({
         required: true,
         type: String
     },
+    userId: {
+        required: true,
+        type: String
+        // type: ObjectId
+    },
     createdAt: {
         required: true,
-        type: Date,
-        default: Date.now
+        // type: Date,
+        type: String,
+        // default: Date.now
     },
     items: [itemSchema],
-    public: {
+    isPublic: {
         required: true,
         type: Boolean
     }
