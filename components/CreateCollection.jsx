@@ -38,7 +38,8 @@ const CreateCollection = ({ userId }) => {
                 name: formData.name,
                 isPublic: radioValue,
                 userId: userId,
-                createdAt: createdAt
+                createdAt: createdAt,
+                items: []
             })
         });
 

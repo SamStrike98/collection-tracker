@@ -3,7 +3,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
-const AddFriendButton = ({ profileId, currentUserId }) => {
+const AddFriendButton = ({ profileId, currentUserId, sender, receiver }) => {
     const router = useRouter()
     const handleButtonClick = async () => {
         // event.preventDefault();
@@ -16,7 +16,8 @@ const AddFriendButton = ({ profileId, currentUserId }) => {
                 "content-type": "application/json",
             },
             body: JSON.stringify({
-                requesteeUserId: currentUserId
+                // requesteeUserId: currentUserId
+                receiver: receiver
             })
         });
 

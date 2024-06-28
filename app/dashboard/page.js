@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import AllCollectionsByUser from "@/components/AllCollectionsByUser"
 import Collections from "@/components/Collections"
 import FriendRequests from "@/components/FriendRequests"
+import FriendsList from "@/components/FriendsList"
 
 const dashboard = async () => {
 
@@ -12,7 +13,14 @@ const dashboard = async () => {
 
     const userData = await res.json()
 
-    const { friendRequestsReceived } = userData
+    const { friendRequestsReceived, friends } = userData
+
+    const receiver = {
+        receiverId: session?.user.id,
+        receiverName: session?.user.displayName
+    }
+
+
 
 
     return (
@@ -21,7 +29,9 @@ const dashboard = async () => {
             {/* <Collections userId={session?.user.id} /> */}
             <AllCollectionsByUser userId={session?.user.id} />
 
-            <FriendRequests currentUserId={currentUserId} friendRequests={friendRequestsReceived} />
+            <FriendRequests currentUserId={currentUserId} friendRequests={friendRequestsReceived} receiver={receiver} />
+
+            <FriendsList friends={friends} />
         </div>
     )
 }

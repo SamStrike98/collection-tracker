@@ -28,26 +28,36 @@ export const PATCH = auth(async function PATCH(request, { params }) {
 
 
     // if (request.auth) {
-    const { name, notes } = await request.json()
+    // const { name, notes } = await request.json()
     // const requesteeUserId = request.auth.user.id
 
-    console.log(name, notes)
+    // console.log(name, notes)
     try {
-
+        const { receiver } = await request.json()
+        console.log(receiver)
         await dbConnect();
         // console.log("Database connected");
         // console.log(params.id)
-        const requesterUserId = params.id
-        const requesteeUserId = request.auth.user.id
+        // const requesterUserId = params.id
+        // const requesteeUserId = request.auth.user.id
+
+        const sender = {
+            senderId: request.auth.user.id,
+            senderName: request.auth.user.displayName
+        }
+
+
         // const commentId = new mongoose.Types.ObjectId()
         // const dateAdded = new Date()
-        console.log(name, notes)
+        // console.log(name, notes)
 
 
-        const user = await sendFriendRequest(requesterUserId, requesteeUserId);
+        // const user = await sendFriendRequest(requesterUserId, requesteeUserId);
+
+        const user = await sendFriendRequest(sender, receiver);
 
         // console.log("Added comment:", commentText);
-        console.log(user)
+        // console.log(user)
 
         return new NextResponse(JSON.stringify(user), {
             status: 200

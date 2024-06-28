@@ -1,4 +1,5 @@
 import Collection from "@/models/collection-model";
+import User from "@/models/user-model";
 
 export async function createCollection(collection) {
     try {
@@ -32,6 +33,11 @@ export async function addItemToCollection(collectionId, { name, dateAdded, notes
         const item = await Collection.findOneAndUpdate(
             { _id: collectionId },
             { $push: { items: { name: name, dateAdded: dateAdded, notes: notes } } },
+        )
+
+        const user = await User.findOneAndUpdate(
+            { _id: item.userId },
+            { $push: { feed: { text: `Added ${name} to the collection ${collectionId}`, id: Object(32) } } },
         )
 
         return item

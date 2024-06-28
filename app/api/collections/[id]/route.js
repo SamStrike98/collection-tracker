@@ -22,6 +22,7 @@ export const PATCH = auth(async function PATCH(request, { params }) {
         console.log(name, notes)
 
 
+
         const item = await addItemToCollection(id, { name: name, dateAdded: dateAdded, notes: notes });
         // console.log("Added comment:", commentText);
         console.log(item)
@@ -30,7 +31,7 @@ export const PATCH = auth(async function PATCH(request, { params }) {
             status: 200
         });
     } catch (error) {
-        console.error("Error addding comment:", error);
+        console.error("Error addding item:", error);
         return new NextResponse(error.message, {
             status: 500
         });

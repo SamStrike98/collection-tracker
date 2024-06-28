@@ -15,6 +15,18 @@ const page = async ({ params }) => {
 
     const userData = await res.json()
 
+    const sender = {
+        senderId: session?.user.id,
+        senderName: session?.user.displayName
+    }
+
+    const receiver = {
+        receiverId: params.id,
+        receiverName: await userData.displayName
+    }
+
+
+
     console.log(userData)
 
 
@@ -26,7 +38,14 @@ const page = async ({ params }) => {
             {userData &&
                 <div>
                     <h2>Profile of {userData.displayName}</h2>
-                    {(currentUserId === profileId || userData?.friendRequestsReceived.includes(currentUserId)) ? '' : <AddFriendButton profileId={profileId} currentUserId={currentUserId} />}
+                    {currentUserId === profileId || userData?.friendRequestsReceived.find(item => item.senderId === sender.senderId)?.senderId === sender.senderId || userData?.friends.find(item => item.userId === sender.senderId)?.userId === sender.senderId ? '' : <AddFriendButton profileId={profileId} currentUserId={currentUserId} sender={sender} receiver={receiver} />}
+
+                    <h2 className='font-bold'>Recent Activity:</h2>
+                    <ul>
+                        {userData?.feed?.reverse().map(item => (
+                            <li key={item.id}>{item.text}</li>
+                        ))}
+                    </ul>
                 </div>
             }
         </div>

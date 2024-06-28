@@ -1,4 +1,5 @@
 import User from "@/models/user-model";
+import mongoose from "mongoose";
 
 export async function getUserById(id) {
     try {
@@ -14,7 +15,7 @@ export async function addCollectionToUser(userId, collectionId) {
     try {
         const user = await User.findOneAndUpdate(
             { _id: userId },
-            { $push: { collections: collectionId } }
+            { $push: { collections: collectionId }, $push: { feed: { text: `Added a new collection ${collectionId}`, id: new mongoose.Types.ObjectId() } } }
         );
         return user;
     } catch (error) {
@@ -22,38 +23,38 @@ export async function addCollectionToUser(userId, collectionId) {
     }
 }
 
-export async function sendFriendRequest(requesterUserId, requesteeUserId) {
-    console.log(requesterUserId, requesteeUserId)
+export async function sendFriendRequest(sender, receiver) {
+    // console.log(sender, receiver)
 
     try {
-        const requester = await User.findOneAndUpdate(
-            { _id: requesterUserId },
-            { $push: { friendRequestsReceived: requesteeUserId } }
+        const senderUser = await User.findOneAndUpdate(
+            { _id: receiver.receiverId },
+            { $push: { friendRequestsReceived: sender } }
         )
 
-        const requestee = await User.findOneAndUpdate(
-            { _id: requesteeUserId },
-            { $push: { friendRequestsSent: requesterUserId } }
+        const receiverUser = await User.findOneAndUpdate(
+            { _id: sender.senderId },
+            { $push: { friendRequestsSent: receiver } }
         )
 
-        return (requester, requestee)
+        return (sender, receiver)
     } catch (error) {
         throw new Error(error)
     }
 }
 
-export async function acceptFriendRequest(acceptorUserId, accepteeUserId) {
-    console.log(acceptorUserId, accepteeUserId)
+export async function acceptFriendRequest(sender, receiver) {
+    console.log(sender, receiver)
 
     try {
-        const acceptor = await User.findOneAndUpdate(
-            { _id: acceptorUserId },
-            { $pull: { friendRequestsReceived: accepteeUserId }, $push: { friends: accepteeUserId } }
+        const receiverUser = await User.findOneAndUpdate(
+            { _id: receiver.receiverId },
+            { $pull: { friendRequestsReceived: sender }, $push: { friends: { userId: sender.senderId, name: sender.senderName } }, $push: { feed: { text: `Is now friends with ${sender.senderName}`, id: new mongoose.Types.ObjectId() } } }
         )
 
-        const acceptee = await User.findOneAndUpdate(
-            { _id: accepteeUserId },
-            { $pull: { friendRequestsSent: acceptorUserId }, $push: { friends: acceptorUserId } }
+        const senderUser = await User.findOneAndUpdate(
+            { _id: sender.senderId },
+            { $pull: { friendRequestsSent: receiver }, $push: { friends: { userId: receiver.receiverId, name: receiver.receiverName } }, $push: { feed: { text: `Is now friends with ${receiver.receiverName}`, id: new mongoose.Types.ObjectId() } } }
         )
 
     } catch (error) {
