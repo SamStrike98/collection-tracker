@@ -17,7 +17,7 @@ export const POST = auth(async function POST(request) {
         await dbConnect();
         console.log("Database connected");
 
-        const createdAt = Date.now;
+        const createdAt = new Date();
         const id = new mongoose.mongo.ObjectId()
 
         // Form a DB Payload

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter, redirect } from 'next/navigation'
 
 const CreateCollection = ({ userId }) => {
     const router = useRouter()
@@ -26,7 +26,7 @@ const CreateCollection = ({ userId }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('form submitted')
-        const createdAt = Date.now()
+
 
 
         const response = await fetch(`/api/collections`, {
@@ -38,13 +38,12 @@ const CreateCollection = ({ userId }) => {
                 name: formData.name,
                 isPublic: radioValue,
                 userId: userId,
-                createdAt: createdAt,
-                items: []
             })
         });
 
         if (response.status === 201) {
             alert('Collection Created')
+            router.push(`/dashboard`)
         } else {
             alert('collection NOT Created')
         }

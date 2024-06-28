@@ -4,6 +4,7 @@ import dbConnect from "@/lib/mongo"
 import User from '@/models/user-model'
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import clientPromise from "./lib/db"
+import { redirect } from "next/navigation"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: MongoDBAdapter(clientPromise),
@@ -62,6 +63,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             // Default to allow sign-in for other providers
             return true;
+
         } catch (error) {
             // Log the error and return false to deny sign-in
             console.error("Error during sign-in:", error);

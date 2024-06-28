@@ -12,6 +12,11 @@ const links = [
         id: 2,
         title: 'Community',
         link: '/community'
+    },
+    {
+        id: 3,
+        title: 'Create Collection',
+        link: '/'
     }
 ]
 
@@ -41,7 +46,7 @@ const Navbar = async () => {
                         :
                         <form action={async () => {
                             'use server'
-                            await signIn('google', { redirectTo: "/" })
+                            await signIn('google', { redirectTo: "/dashboard" })
                         }}>
                             <button type='submit'>Sign In</button>
                         </form>

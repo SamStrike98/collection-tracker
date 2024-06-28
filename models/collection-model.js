@@ -31,7 +31,7 @@ const collectionSchema = new mongoose.Schema({
     createdAt: {
         required: true,
         // type: Date,
-        type: String,
+        type: Date,
         // default: Date.now
     },
     items: [itemSchema],
