@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
     collections: {
         type: Array,
     },
+    friendRequestsSent: {
+        type: Array
+    },
+    friendRequestsReceived: {
+        type: Array
+    },
     friends: {
         type: Array,
     }

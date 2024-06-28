@@ -11,7 +11,7 @@ const ItemTableItems = ({ data }) => {
     return (
         <tbody>
             <tr>
-                <td><input type="text" onChange={(e) => setQuery(e.target.value.toLowerCase())} /></td>
+                <td><input type="text" placeholder="search" onChange={(e) => setQuery(e.target.value.toLowerCase())} className="border boreder-black" /></td>
                 <td><input type="text" /></td>
             </tr>
             {data.items.filter(item => (item.name.toLowerCase().includes(query))).map(item => (
