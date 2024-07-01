@@ -8,15 +8,15 @@ const AcceptFriendBtn = ({ currentUserId, senderId, senderName, receiver }) => {
     const handleButtonClick = async () => {
         // event.preventDefault();
         console.log('form submitted')
-        console.log(senderId, senderName)
+
         // const id = data._id
 
         const sender = {
-            senderId: senderId,
-            senderName: senderName
+            userId: senderId,
+            userName: senderName
         }
 
-        const response = await fetch(`/api/user/${receiver.receiverId}/request`, {
+        const response = await fetch(`/api/user/${receiver.userId}/request`, {
             method: 'PATCH',
             headers: {
                 "content-type": "application/json",

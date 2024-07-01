@@ -19,6 +19,15 @@ export async function getAllCollections() {
     }
 }
 
+export async function deleteCollectionById(id) {
+    try {
+        const collection = await Collection.findByIdAndDelete(id);
+        return collection;
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 export async function getAllCollectionsByUser(userId) {
     try {
         const collections = await Collection.find({ userId: userId });
@@ -48,9 +57,35 @@ export async function addItemToCollection(collectionId, { name, dateAdded, notes
 
 export async function getCollectionById(collectionId) {
     try {
-        const collection = await Collection.findById(collectionId);
+        const collection = await Collection.findOneAndUpdate(
+            { _id: collectionId },
+            { $inc: { views: 1 } },
+        );
         return collection;
     } catch (error) {
         throw new Error(error)
     }
 }
+
+export async function likeCollection(collectionId, userId) {
+    try {
+        const collection = await Collection.findOneAndUpdate(
+            { _id: collectionId },
+            { $push: { likes: userId } },
+        )
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export async function unlikeCollection(collectionId, userId) {
+    try {
+        const collection = await Collection.findOneAndUpdate(
+            { _id: collectionId },
+            { $pull: { likes: userId } },
+        )
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+

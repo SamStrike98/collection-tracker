@@ -3,6 +3,7 @@ import SingleCollection from '@/components/SingleCollection'
 import React from 'react'
 import { auth } from '@/auth'
 import ItemTableItems from '@/components/ItemTableItems'
+import DeleteCollectionBtn from '@/components/DeleteCollectionBtn'
 
 const page = async ({ params }) => {
     const session = await auth()
@@ -19,10 +20,12 @@ const page = async ({ params }) => {
             {data ?
                 <div className=''>
                     <h2>{data.name} Collection</h2>
+                    <DeleteCollectionBtn collectionId={collectionId} />
+                    <p>{`Views ${data.views}`}</p>
 
                     {data.items.length === 0 ? <p>Collection Has No Items</p> :
 
-                        <table class="table-fixed">
+                        <table className="table-fixed">
                             <thead>
                                 <tr >
                                     <th>Name</th>

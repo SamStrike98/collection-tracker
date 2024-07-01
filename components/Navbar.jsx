@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { auth, signIn, signOut } from '@/auth'
+import Image from 'next/image'
 
 
 const links = [
@@ -16,7 +17,7 @@ const links = [
     {
         id: 3,
         title: 'Create Collection',
-        link: '/'
+        link: '/collections/create'
     }
 ]
 
@@ -59,6 +60,8 @@ const Navbar = async () => {
             </div>
 
         </div>
+
+
     )
 }
 

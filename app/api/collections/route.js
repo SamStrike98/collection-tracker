@@ -9,7 +9,7 @@ export const POST = auth(async function POST(request) {
     // if (request.auth?.user.role === 'admin') {
     const session = await auth()
     try {
-        const { name, isPublic, items, userId } = await request.json();
+        const { name, isPublic, items, userId, iconColour } = await request.json();
 
         // const userId = session?.user.id
 
@@ -27,7 +27,8 @@ export const POST = auth(async function POST(request) {
             userId,
             isPublic,
             items,
-            id
+            id,
+            iconColour
         };
 
         // Update the DB

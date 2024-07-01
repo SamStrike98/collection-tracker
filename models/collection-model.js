@@ -38,6 +38,25 @@ const collectionSchema = new mongoose.Schema({
     isPublic: {
         required: true,
         type: Boolean
+    },
+    views: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    iconColour: {
+        type: String,
+        required: true,
+        default: 'green'
+    },
+    icon: {
+        type: String,
+        required: true,
+        default: 'rocket'
+    },
+    likes: {
+        type: Array,
+        default: []
     }
 
 

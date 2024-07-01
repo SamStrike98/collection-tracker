@@ -21,8 +21,8 @@ export const PATCH = auth(async function PATCH(request, { params }) {
         // const requesteeUserId = request.auth.user.id
 
         const receiver = {
-            receiverId: request.auth.user.id,
-            receiverName: request.auth.user.displayName
+            userId: request.auth.user.id,
+            userName: request.auth.user.displayName
         }
 
 
@@ -38,7 +38,7 @@ export const PATCH = auth(async function PATCH(request, { params }) {
         // console.log("Added comment:", commentText);
         // console.log(user)
 
-        return new NextResponse(JSON.stringify(user), {
+        return new NextResponse(JSON.stringify(sender, receiver), {
             status: 200
         });
     } catch (error) {

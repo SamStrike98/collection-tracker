@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { addItemToCollection, getCollectionById } from "@/queries/collections";
+import { addItemToCollection, deleteCollectionById, getCollectionById } from "@/queries/collections";
 import dbConnect from "@/lib/mongo";
 import mongoose from "mongoose";
 import { auth } from "@/auth";
@@ -62,3 +62,21 @@ export const GET = async (request, { params }) => {
         });
     }
 };
+
+export const DELETE = async (request, { params }) => {
+    try {
+        await dbConnect()
+        console.log('database connected');
+        const collectionId = params.id
+        const collection = await deleteCollectionById(collectionId);
+
+        console.log('collection deleted', collection);
+        return new NextResponse(JSON.stringify(collection), {
+            status: 200
+        })
+    } catch (error) {
+        return new NextResponse(error.message, {
+            status: 500
+        })
+    }
+}

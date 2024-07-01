@@ -15,7 +15,7 @@ export async function addCollectionToUser(userId, collectionId) {
     try {
         const user = await User.findOneAndUpdate(
             { _id: userId },
-            { $push: { collections: collectionId }, $push: { feed: { text: `Added a new collection ${collectionId}`, id: new mongoose.Types.ObjectId() } } }
+            { $push: { collections: collectionId, feed: { text: `Added a new collection ${collectionId}`, id: new mongoose.Types.ObjectId() } } }
         );
         return user;
     } catch (error) {
@@ -28,12 +28,12 @@ export async function sendFriendRequest(sender, receiver) {
 
     try {
         const senderUser = await User.findOneAndUpdate(
-            { _id: receiver.receiverId },
+            { _id: receiver.userId },
             { $push: { friendRequestsReceived: sender } }
         )
 
         const receiverUser = await User.findOneAndUpdate(
-            { _id: sender.senderId },
+            { _id: sender.userId },
             { $push: { friendRequestsSent: receiver } }
         )
 
@@ -48,17 +48,53 @@ export async function acceptFriendRequest(sender, receiver) {
 
     try {
         const receiverUser = await User.findOneAndUpdate(
-            { _id: receiver.receiverId },
-            { $pull: { friendRequestsReceived: sender }, $push: { friends: { userId: sender.senderId, name: sender.senderName } }, $push: { feed: { text: `Is now friends with ${sender.senderName}`, id: new mongoose.Types.ObjectId() } } }
+            { _id: receiver.userId },
+            {
+                $pull: { friendRequestsReceived: sender },
+                $push: {
+                    friends: sender,
+                    feed: { text: `Is now friends with ${sender.userName}`, id: new mongoose.Types.ObjectId() }
+                }
+            },
         )
 
         const senderUser = await User.findOneAndUpdate(
-            { _id: sender.senderId },
-            { $pull: { friendRequestsSent: receiver }, $push: { friends: { userId: receiver.receiverId, name: receiver.receiverName } }, $push: { feed: { text: `Is now friends with ${receiver.receiverName}`, id: new mongoose.Types.ObjectId() } } }
+            { _id: sender.userId },
+            {
+                $pull: { friendRequestsSent: receiver },
+                $push: {
+                    friends: receiver,
+                    feed: { text: `Is now friends with ${receiver.userName}`, id: new mongoose.Types.ObjectId() }
+                }
+            },
         )
 
     } catch (error) {
         throw new Error(error)
+    }
+}
+
+export async function userLikeCollection(collectionId, userId) {
+    try {
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { likedCollections: { collectionId: collectionId } } },
+
+        )
+    } catch (error) {
+
+    }
+}
+
+export async function userUnlikeCollection(collectionId, userId) {
+    try {
+        const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { likedCollections: { collectionId: collectionId } } },
+
+        )
+    } catch (error) {
+
     }
 }
 

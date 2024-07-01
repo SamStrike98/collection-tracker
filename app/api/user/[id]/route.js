@@ -42,8 +42,8 @@ export const PATCH = auth(async function PATCH(request, { params }) {
         // const requesteeUserId = request.auth.user.id
 
         const sender = {
-            senderId: request.auth.user.id,
-            senderName: request.auth.user.displayName
+            userId: request.auth.user.id,
+            userName: request.auth.user.displayName
         }
 
 

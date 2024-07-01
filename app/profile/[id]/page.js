@@ -16,29 +16,25 @@ const page = async ({ params }) => {
     const userData = await res.json()
 
     const sender = {
-        senderId: session?.user.id,
-        senderName: session?.user.displayName
+        userId: session?.user.id,
+        userName: session?.user.displayName
     }
 
     const receiver = {
-        receiverId: params.id,
-        receiverName: await userData.displayName
+        userId: params.id,
+        userName: await userData.displayName
     }
 
 
-
-    console.log(userData)
-
-
     return (
-        <div>
+        <div className='bg-[#f2f2f2]'>
 
 
-            <AllCollectionsByUser userId={profileId} />
+            <AllCollectionsByUser userId={profileId} currentUserId={currentUserId} />
             {userData &&
                 <div>
                     <h2>Profile of {userData.displayName}</h2>
-                    {currentUserId === profileId || userData?.friendRequestsReceived.find(item => item.senderId === sender.senderId)?.senderId === sender.senderId || userData?.friends.find(item => item.userId === sender.senderId)?.userId === sender.senderId ? '' : <AddFriendButton profileId={profileId} currentUserId={currentUserId} sender={sender} receiver={receiver} />}
+                    {currentUserId === profileId || userData?.friendRequestsReceived.find(item => item.userId === sender.userId)?.userId === sender.userId || userData?.friends.find(item => item.userId === sender.userId)?.userId === sender.userId ? '' : <AddFriendButton profileId={profileId} currentUserId={currentUserId} sender={sender} receiver={receiver} />}
 
                     <h2 className='font-bold'>Recent Activity:</h2>
                     <ul>

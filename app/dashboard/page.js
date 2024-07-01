@@ -9,6 +9,7 @@ const dashboard = async () => {
     const session = await auth()
     const currentUserId = session?.user.id
 
+
     const res = await fetch(`${process.env.URL}/api/user/${session?.user.id}`, { cache: 'no-store' })
 
     const userData = await res.json()
@@ -16,18 +17,18 @@ const dashboard = async () => {
     const { friendRequestsReceived, friends } = userData
 
     const receiver = {
-        receiverId: session?.user.id,
-        receiverName: session?.user.displayName
+        userId: session?.user.id,
+        userName: session?.user.displayName
     }
 
 
 
 
     return (
-        <div>
+        <div className="bg-[#f2f2f2]">
             <h2>{`${session?.user.name}'s Dashboard`}</h2>
             {/* <Collections userId={session?.user.id} /> */}
-            <AllCollectionsByUser userId={session?.user.id} />
+            <AllCollectionsByUser userId={currentUserId} currentUserId={currentUserId} />
 
             <FriendRequests currentUserId={currentUserId} friendRequests={friendRequestsReceived} receiver={receiver} />
 

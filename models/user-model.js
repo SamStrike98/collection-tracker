@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
     },
     feed: {
         type: Array
+    },
+    likedCollections: {
+        type: Object,
     }
 });
 
