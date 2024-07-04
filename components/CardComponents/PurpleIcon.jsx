@@ -1,13 +1,18 @@
 import React from 'react'
 import { GrDeploy } from "react-icons/gr";
 import { BiFootball } from "react-icons/bi";
-import { AiFillCar } from "react-icons/ai";
+import { AiFillCar, AiFillCustomerService, AiFillPushpin, AiFillSetting } from "react-icons/ai";
+import { GiPostStamp } from "react-icons/gi";
 
 const PurpleIcon = ({ icon = { rocket } }) => {
     const iconArr = {
         rocket: <GrDeploy size={28} />,
         football: <BiFootball size={28} />,
-        car: <AiFillCar size={28} />
+        car: <AiFillCar size={28} />,
+        stamp: <GiPostStamp size={28} />,
+        headPhones: <AiFillCustomerService size={28} />,
+        pin: <AiFillPushpin size={28} />,
+        cog: <AiFillSetting size={28} />
 
     }
     return (

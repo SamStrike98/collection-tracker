@@ -60,11 +60,7 @@ const AddItems = ({ collectionId }) => {
 
                 <label htmlFor="name">Collection Notes</label>
                 <textarea id="name" name="notes" value={formData.notes} onChange={handleChange} className="border border-black" />
-                {/* <label htmlFor="isPublic">Public</label>
-                <input type="radio" name="isPublic" value='true' onChange={handleRadioChange} checked={radioValue === "true"} className="border border-black" /> */}
 
-                {/* <label htmlFor="isPublic">Private</label>
-                <input type="radio" name="isPublic" value="false" onChange={handleRadioChange} checked={radioValue === "false"} className="border border-black" /> */}
                 <button type="submit" className='bg-blue-400 rounded-md px-2 py-1'>Add Item</button>
             </form>
 

@@ -9,7 +9,7 @@ export default async function Page() {
         redirect('/login')
     } else {
         return (
-            <main className="">
+            <main className="bg-[#f2f2f2] min-h-[100vh]">
                 <CreateCollection userId={session?.user.id} />
             </main>
         )

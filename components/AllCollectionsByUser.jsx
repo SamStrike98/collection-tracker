@@ -16,9 +16,9 @@ const AllCollectionsByUser = async ({ userId, currentUserId }) => {
             {data &&
 
                 <ul className="flex flex-row flex-wrap">
-                    {data.map(collection => (
+                    {data.reverse().map(collection => (
 
-                        (<CollectionCard key={collection._id} colour={collection.iconColour} icon={'rocket'} collectionId={collection._id} collectionName={collection.name} numberOfItems={collection.items.length} currentUserId={currentUserId} likes={collection.likes} />)
+                        (<CollectionCard key={collection._id} colour={collection.iconColour} icon={collection.icon} collectionId={collection._id} collectionName={collection.name} numberOfItems={collection.items.length} currentUserId={currentUserId} likes={collection.likes} />)
 
                     ))}
                 </ul>

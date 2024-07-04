@@ -44,6 +44,13 @@ const page = async ({ params }) => {
                         </table>
                     }
                     <AddItems collectionId={collectionId} />
+
+                    <h2 className='font-bold text-lg'>Items Needed</h2>
+                    <ul>
+                        {data?.itemsNeed.map((item, index) => (
+                            <li key={index}> {item.name} </li>
+                        ))}
+                    </ul>
                 </div>
                 :
                 <div>

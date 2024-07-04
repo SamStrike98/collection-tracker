@@ -2,6 +2,7 @@ import React from 'react'
 import { auth } from '@/auth'
 import AddFriendButton from '@/components/AddFriendButton'
 import AllCollectionsByUser from '@/components/AllCollectionsByUser'
+import FeedCard from '@/components/FeedCard'
 
 
 const page = async ({ params }) => {
@@ -39,7 +40,7 @@ const page = async ({ params }) => {
                     <h2 className='font-bold'>Recent Activity:</h2>
                     <ul>
                         {userData?.feed?.reverse().map(item => (
-                            <li key={item.id}>{item.text}</li>
+                            <FeedCard key={item.id} feedItem={item} />
                         ))}
                     </ul>
                 </div>

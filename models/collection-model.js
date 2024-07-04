@@ -7,10 +7,10 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dateAdded: {
-        type: Date,
-        required: true,
-    },
+    // dateAdded: {
+    //     type: Date,
+    //     required: true,
+    // },
     notes: {
         type: String,
     },
@@ -35,6 +35,7 @@ const collectionSchema = new mongoose.Schema({
         // default: Date.now
     },
     items: [itemSchema],
+    itemsNeed: [itemSchema],
     isPublic: {
         required: true,
         type: Boolean
