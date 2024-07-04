@@ -201,7 +201,7 @@ const CreateCollection = ({ userId }) => {
 
                 <div className="h-[250px] flex flex-row justify-evenly gap-5 rounded-md text-black">
                     <div className="flex flex-col items-center gap-3 border border-black border-opacity-20 w-[50%] p-2 rounded-lg shadow-lg">
-                        <h2 className="font-bold">Items You've Got</h2>
+                        <h2 className="font-bold">Items You Have</h2>
                         <div className="flex flex-row items-center w-[80%]">
                             <label htmlFor="" className="w-1/3">Item Name</label>
                             <input onChange={handleGotItemChange} type="text" name="name" className="outline-none focus-within:border-blue-500 px-2 py-1 border border-black rounded-md w-full" />
