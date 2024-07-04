@@ -50,7 +50,7 @@ const CreateCollection = ({ userId }) => {
 
     const [formData, setFormData] = useState({ name: '', isPublic: '' });
 
-    const [publicRadioValue, setPublicRadioValue] = useState('true')
+    const [publicRadioValue, setPublicRadioValue] = useState(true)
     const [colourRadioValue, setColourRadioValue] = useState('green')
     const [iconRadioValue, setIconRadioValue] = useState('rocket')
     // console.log(formData.title)

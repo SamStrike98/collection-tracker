@@ -1,3 +1,5 @@
+'use client'
+
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const ItemCard = ({ name, notes, setArr, id }) => {
